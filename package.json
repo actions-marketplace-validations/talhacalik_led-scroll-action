@@ -1,0 +1,8 @@
+{
+  "name": "led-scroll-action",
+  "version": "1.0.0",
+  "description": "GitHub Action: generate a purple LED / contribution-grid style scrolling text SVG for profile READMEs",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true
+}

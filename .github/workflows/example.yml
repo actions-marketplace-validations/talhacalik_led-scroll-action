@@ -1,0 +1,23 @@
+name: Update LED banner
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: talhacalik/led-scroll-action@v1
+        with:
+          text: TALHACALIK
+          color: '#b026ff'
+          output: led.svg
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update led banner'
+          file_pattern: led.svg

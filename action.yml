@@ -1,0 +1,50 @@
+name: 'LED Scroll Banner'
+description: 'Generate a purple, contribution-graph-style scrolling LED text SVG for your GitHub profile README'
+author: 'talhacalik'
+branding:
+  icon: 'grid'
+  color: 'purple'
+
+inputs:
+  text:
+    description: 'Text to render (A-Z, 0-9, space, and - _ ! . ? are supported; lowercase is auto-uppercased)'
+    required: true
+  color:
+    description: 'Hex color for lit cells'
+    required: false
+    default: '#b026ff'
+  background:
+    description: 'Hex color for the panel background'
+    required: false
+    default: '#0d1117'
+  off_color:
+    description: 'Hex color for unlit grid cells'
+    required: false
+    default: '#21262d'
+  speed:
+    description: 'Scroll speed in pixels per second'
+    required: false
+    default: '50'
+  output:
+    description: 'Path to write the generated SVG file'
+    required: false
+    default: 'led.svg'
+
+outputs:
+  svg-path:
+    description: 'Path of the generated SVG file'
+    value: ${{ steps.generate.outputs.svg-path }}
+
+runs:
+  using: 'composite'
+  steps:
+    - id: generate
+      shell: bash
+      run: node "${{ github.action_path }}/index.js"
+      env:
+        INPUT_TEXT: ${{ inputs.text }}
+        INPUT_COLOR: ${{ inputs.color }}
+        INPUT_BACKGROUND: ${{ inputs.background }}
+        INPUT_OFF_COLOR: ${{ inputs.off_color }}
+        INPUT_SPEED: ${{ inputs.speed }}
+        INPUT_OUTPUT: ${{ inputs.output }}
