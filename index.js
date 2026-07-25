@@ -90,7 +90,7 @@ function main() {
 
   const cellSize = 10, cellGap = 3, pitch = cellSize + cellGap, radius = 2;
   const rows = 7, letterGap = 1, glyphRows = 5, glyphRowOffset = 1;
-  const loopGapCells = 10; // extra blank space where the text loops, so end and start don't run together
+  const loopGapCells = 10; // extra unlit cells where the text loops, so end and start don't run together
   const padY = 10;
 
   let gridWidth = 0;
@@ -123,6 +123,13 @@ function main() {
       }
     }
     colOffset += w + letterGap;
+  }
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < loopGapCells; c++) {
+      const x = (colOffset + c) * pitch;
+      const y = padY + r * pitch;
+      cells += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="${radius}" fill="${offColor}"/>`;
+    }
   }
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewW} ${viewH}" width="100%" height="${viewH}" role="img" aria-label="${escapeXmlAttr(rawText)}">

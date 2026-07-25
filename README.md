@@ -3,9 +3,7 @@
 [![GitHub release](https://img.shields.io/github/v/tag/talhacalik/led-scroll-action?label=release&style=flat-square)](https://github.com/talhacalik/led-scroll-action/tags)
 
 A GitHub Action that generates a purple, contribution-graph-style scrolling
-LED text SVG for your profile README — same idea as
-[Platane/snk](https://github.com/Platane/snk), but the grid spells out
-whatever text you give it instead of your contribution history.
+LED text SVG for your profile README.
 
 <p align="center">
   <img alt="led scroll banner example" src="https://raw.githubusercontent.com/talhacalik/talhacalik/main/led.svg" width="480" />
@@ -14,7 +12,9 @@ whatever text you give it instead of your contribution history.
 Every character sits on a 7-row grid (row 0 and row 6 always empty), matching
 the row count of a real GitHub contribution graph. Letters are variable
 width — narrow ones like `I` stay slim, wide ones like `M`/`W` get extra
-columns — and a wide gap is inserted where the text loops back to the start.
+columns — and where the text loops back to the start, a wide stretch of
+unlit (off) cells is inserted, not blank space, so the grid stays
+continuous.
 
 ## Usage
 
@@ -36,7 +36,7 @@ jobs:
       - uses: talhacalik/led-scroll-action@v1
         with:
           text: HELLO WORLD !
-          color: '#b026ff'
+          color: '#bff7ff'
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
@@ -64,7 +64,7 @@ A ready-to-copy version of this workflow is in
 | Input        | Required | Default   | Description                                       |
 | ------------ | -------- | --------- | --------------------------------------------------|
 | `text`       | yes      | —         | Text to render. Lowercase is auto-uppercased.      |
-| `color`      | no       | `#b026ff` | Hex color for lit cells.                           |
+| `color`      | no       | `#bff7ff` | Hex color for lit cells.                           |
 | `background` | no       | `#0d1117` | Hex color for the panel background.                |
 | `off_color`  | no       | `#21262d` | Hex color for unlit grid cells.                    |
 | `speed`      | no       | `50`      | Scroll speed in pixels/second.                     |
@@ -94,5 +94,5 @@ The action is a plain Node script with no dependencies, so it also runs
 outside of GitHub Actions:
 
 ```bash
-INPUT_TEXT="HELLO WORLD !" INPUT_COLOR="#b026ff" node index.js
+INPUT_TEXT="HELLO WORLD !" INPUT_COLOR="#bff7ff" node index.js
 ```
