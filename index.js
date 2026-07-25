@@ -72,11 +72,16 @@ function main() {
     return;
   }
 
-  const color = getInput('COLOR', '#b026ff');
-  const background = getInput('BACKGROUND', '#0d1117');
-  const offColor = getInput('OFF_COLOR', '#21262d');
-  const speed = parseFloat(getInput('SPEED', '50')) || 50;
+  const color = escapeXmlAttr(getInput('COLOR', '#bff7ff'));
+  const background = escapeXmlAttr(getInput('BACKGROUND', '#0d1117'));
+  const offColor = escapeXmlAttr(getInput('OFF_COLOR', '#21262d'));
   const outputPath = getInput('OUTPUT', 'led.svg');
+
+  let speed = parseFloat(getInput('SPEED', '50'));
+  if (!(speed > 0)) {
+    console.log('::warning::`speed` must be a positive number, got "' + getInput('SPEED', '50') + '". Using 50.');
+    speed = 50;
+  }
 
   const letters = [];
   for (const ch of rawText.toUpperCase()) {
@@ -86,6 +91,11 @@ function main() {
       console.log('::warning::Unsupported character "' + ch + '" skipped (treated as space).');
       letters.push(' ');
     }
+  }
+  if (letters.every((ch) => ch === ' ')) {
+    console.log('::error::`text` has no supported characters — nothing would be visible.');
+    process.exitCode = 1;
+    return;
   }
 
   const cellSize = 10, cellGap = 3, pitch = cellSize + cellGap, radius = 2;
@@ -149,13 +159,23 @@ function main() {
 </svg>
 `;
 
-  fs.mkdirSync(path.dirname(path.resolve(outputPath)), { recursive: true });
-  fs.writeFileSync(outputPath, svg, 'utf8');
+  try {
+    fs.mkdirSync(path.dirname(path.resolve(outputPath)), { recursive: true });
+    fs.writeFileSync(outputPath, svg, 'utf8');
+  } catch (err) {
+    console.log('::error::Could not write "' + outputPath + '": ' + err.message);
+    process.exitCode = 1;
+    return;
+  }
   console.log(`Generated ${outputPath} (${letters.length} chars, ${gridWidth}px wide, ${duration}s loop)`);
 
   const githubOutput = process.env.GITHUB_OUTPUT;
   if (githubOutput) {
-    fs.appendFileSync(githubOutput, `svg-path=${outputPath}\n`);
+    try {
+      fs.appendFileSync(githubOutput, `svg-path=${outputPath}\n`);
+    } catch (err) {
+      console.log('::warning::Could not write step output: ' + err.message);
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 name: 'LED Scroll Banner'
-description: 'Generate a purple, contribution-graph-style scrolling LED text SVG for your GitHub profile README'
+description: 'Generate a contribution-graph-style scrolling LED text SVG (color customizable) for your GitHub profile README'
 author: 'talhacalik'
 branding:
   icon: 'grid'
@@ -12,7 +12,7 @@ inputs:
   color:
     description: 'Hex color for lit cells'
     required: false
-    default: '#b026ff'
+    default: '#bff7ff'
   background:
     description: 'Hex color for the panel background'
     required: false

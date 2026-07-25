@@ -2,8 +2,8 @@
 
 [![GitHub release](https://img.shields.io/github/v/tag/talhacalik/led-scroll-action?label=release&style=flat-square)](https://github.com/talhacalik/led-scroll-action/tags)
 
-A GitHub Action that generates a purple, contribution-graph-style scrolling
-LED text SVG for your profile README.
+A GitHub Action that generates a contribution-graph-style scrolling LED
+text SVG (color customizable) for your profile README.
 
 <p align="center">
   <img alt="led scroll banner example" src="https://raw.githubusercontent.com/talhacalik/talhacalik/main/led.svg" width="480" />
