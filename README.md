@@ -1,10 +1,5 @@
 # led-scroll-action
 
-[![GitHub release](https://img.shields.io/github/v/tag/talhacalik/led-scroll-action?label=release&style=flat-square)](https://github.com/talhacalik/led-scroll-action/tags)
-
-A GitHub Action that generates a contribution-graph-style scrolling LED
-text SVG (color customizable) for your profile README.
-
 <p align="center">
   <a href="https://github.com/talhacalik/led-scroll-action/releases/latest" target="_blank" rel="noopener noreferrer">
     <img src="https://img.shields.io/github/v/release/talhacalik/led-scroll-action?style=flat&logo=github&logoColor=white&color=181717" alt="release" />
@@ -22,6 +17,10 @@ text SVG (color customizable) for your profile README.
     <img src="https://img.shields.io/badge/license-MIT-blue?style=flat" alt="license" />
   </a>
 </p>
+
+A GitHub Action that generates a contribution-graph-style scrolling LED
+text SVG (color customizable) for your profile README.
+
 
 Every character sits on a 7-row grid (row 0 and row 6 always empty), matching
 the row count of a real GitHub contribution graph. Letters are variable
