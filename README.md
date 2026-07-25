@@ -6,7 +6,21 @@ A GitHub Action that generates a contribution-graph-style scrolling LED
 text SVG (color customizable) for your profile README.
 
 <p align="center">
-  <img alt="led scroll banner example" src="https://raw.githubusercontent.com/talhacalik/talhacalik/main/led.svg" width="480" />
+  <a href="https://github.com/talhacalik/led-scroll-action/releases/latest" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/github/v/release/talhacalik/led-scroll-action?style=flat&logo=github&logoColor=white&color=181717" alt="release" />
+  </a>
+  <a href="https://github.com/marketplace/actions/led-scroll-banner" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Marketplace-led--scroll--banner-2088FF?style=flat&logo=githubactions&logoColor=white" alt="GitHub Marketplace" />
+  </a>
+  <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white" alt="Node.js" />
+  </a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" alt="JavaScript" />
+  </a>
+  <a href="https://github.com/talhacalik/led-scroll-action/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/badge/license-MIT-blue?style=flat" alt="license" />
+  </a>
 </p>
 
 Every character sits on a 7-row grid (row 0 and row 6 always empty), matching
