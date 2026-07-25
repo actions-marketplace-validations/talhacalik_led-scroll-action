@@ -98,7 +98,7 @@ function main() {
   gridWidth += loopGapCells * pitch;
   const gridHeight = rows * pitch;
   const viewH = gridHeight + padY * 2;
-  const viewW = Math.min(gridWidth, 480);
+  const viewW = Math.min(gridWidth, 720); // ~720px matches a real GitHub contribution graph's rendered width
   const duration = (gridWidth / speed).toFixed(1);
 
   let cells = '';
