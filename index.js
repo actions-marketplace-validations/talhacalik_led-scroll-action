@@ -90,10 +90,12 @@ function main() {
 
   const cellSize = 10, cellGap = 3, pitch = cellSize + cellGap, radius = 2;
   const rows = 7, letterGap = 1, glyphRows = 5, glyphRowOffset = 1;
+  const loopGapCells = 4; // extra blank space where the text loops, so end and start don't run together
   const padY = 10;
 
   let gridWidth = 0;
   for (const ch of letters) gridWidth += (font[ch][0].length + letterGap) * pitch;
+  gridWidth += loopGapCells * pitch;
   const gridHeight = rows * pitch;
   const viewH = gridHeight + padY * 2;
   const viewW = Math.min(gridWidth, 480);
