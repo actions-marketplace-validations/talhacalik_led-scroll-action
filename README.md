@@ -1,10 +1,20 @@
 # led-scroll-action
 
+[![GitHub release](https://img.shields.io/github/v/tag/talhacalik/led-scroll-action?label=release&style=flat-square)](https://github.com/talhacalik/led-scroll-action/tags)
+
 A GitHub Action that generates a purple, contribution-graph-style scrolling
-LED text SVG for your profile README
+LED text SVG for your profile README — same idea as
+[Platane/snk](https://github.com/Platane/snk), but the grid spells out
+whatever text you give it instead of your contribution history.
+
+<p align="center">
+  <img alt="led scroll banner example" src="https://raw.githubusercontent.com/talhacalik/talhacalik/main/led.svg" width="480" />
+</p>
 
 Every character sits on a 7-row grid (row 0 and row 6 always empty), matching
-the row count of a real GitHub contribution graph.
+the row count of a real GitHub contribution graph. Letters are variable
+width — narrow ones like `I` stay slim, wide ones like `M`/`W` get extra
+columns — and a wide gap is inserted where the text loops back to the start.
 
 ## Usage
 
@@ -13,8 +23,9 @@ name: Update LED banner
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
+
+permissions:
+  contents: write
 
 jobs:
   generate:
@@ -24,7 +35,7 @@ jobs:
 
       - uses: talhacalik/led-scroll-action@v1
         with:
-          text: TALHACALIK
+          text: HELLO WORLD !
           color: '#b026ff'
 
       - uses: stefanzweifel/git-auto-commit-action@v5
@@ -33,10 +44,16 @@ jobs:
           file_pattern: led.svg
 ```
 
-Then embed it in your profile README:
+> `permissions: contents: write` is required — without it, the commit step
+> fails to push. Your repo's **Settings → Actions → General → Workflow
+> permissions** must also allow write access, or this setting is ignored.
+
+Then embed it in your profile README, centered:
 
 ```markdown
-<img src="./led.svg" alt="talhacalik" />
+<p align="center">
+  <img src="./led.svg" alt="led-scroll-action" />
+</p>
 ```
 
 A ready-to-copy version of this workflow is in
@@ -44,14 +61,14 @@ A ready-to-copy version of this workflow is in
 
 ## Inputs
 
-| Input        | Required | Default    | Description                                                          |
-| ------------ | -------- | ---------- | ---------------------------------------------------------------------|
-| `text`       | yes      | —          | Text to render. Lowercase is auto-uppercased.                        |
-| `color`      | no       | `#b026ff`  | Hex color for lit cells.                                             |
-| `background` | no       | `#0d1117`  | Hex color for the panel background.                                  |
-| `off_color`  | no       | `#21262d`  | Hex color for unlit grid cells.                                      |
-| `speed`      | no       | `50`       | Scroll speed in pixels/second.                                       |
-| `output`     | no       | `led.svg`  | Output SVG file path.                                                |
+| Input        | Required | Default   | Description                                       |
+| ------------ | -------- | --------- | --------------------------------------------------|
+| `text`       | yes      | —         | Text to render. Lowercase is auto-uppercased.      |
+| `color`      | no       | `#b026ff` | Hex color for lit cells.                           |
+| `background` | no       | `#0d1117` | Hex color for the panel background.                |
+| `off_color`  | no       | `#21262d` | Hex color for unlit grid cells.                    |
+| `speed`      | no       | `50`      | Scroll speed in pixels/second.                     |
+| `output`     | no       | `led.svg` | Output SVG file path.                              |
 
 ## Outputs
 
@@ -64,11 +81,18 @@ A ready-to-copy version of this workflow is in
 `A`-`Z`, `0`-`9`, space, `-`, `_`, `!`, `.`, `?`. Any other character is
 replaced with a space and logged as a workflow warning.
 
+## Font
+
+A hand-drawn, variable-width 5-row dot-matrix font (see `index.js`). Cell
+size and spacing (`10px` cells, `3px` gap) match a real GitHub contribution
+graph, so the rendered panel reads as an extension of it rather than a
+separate widget.
+
 ## Local usage
 
 The action is a plain Node script with no dependencies, so it also runs
 outside of GitHub Actions:
 
 ```bash
-INPUT_TEXT="TALHACALIK" INPUT_COLOR="#b026ff" node index.js
+INPUT_TEXT="HELLO WORLD !" INPUT_COLOR="#b026ff" node index.js
 ```
