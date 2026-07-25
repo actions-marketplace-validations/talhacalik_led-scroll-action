@@ -18,6 +18,10 @@
   </a>
 </p>
 
+<p align="center">
+  <img alt="led scroll banner example" src="https://raw.githubusercontent.com/talhacalik/talhacalik/main/led.svg" width="480" />
+</p>
+
 A GitHub Action that generates a contribution-graph-style scrolling LED
 text SVG (color customizable) for your profile README.
 
